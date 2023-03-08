@@ -9,9 +9,8 @@ import { HeroService } from '../hero.service';
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.scss']
 })
-export class HeroesComponent implements OnInit {
-  
-  
+export class HeroesComponent implements OnInit 
+{
   heroes: Hero[] = [];
 
   constructor(private heroService: HeroService) { }
@@ -19,14 +18,12 @@ export class HeroesComponent implements OnInit {
   ngOnInit(): void {
     this.getHeroes();
   }
-
-
-
-  getHeroes(): void {
+  getHeroes(): void 
+  {
     this.heroService.getHeroes()
     .subscribe(heroes => this.heroes = heroes);
   }
-
+  
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
@@ -36,17 +33,10 @@ export class HeroesComponent implements OnInit {
       });
   }
 
-  /** POST: サーバーに新しいヒーローを登録する */
-  addHero(hero: Hero): Observable<Hero> {
-    return this.http.post<Hero>(this.heroesUrl, hero, this.httpOptions).pipe(
-      tap((newHero: Hero) => this.log(`added hero w/ id=${newHero.id}`)),
-      catchError(this.handleError<Hero>('addHero'))
-    );
-  }
-
-  delete(hero: Hero): void {
+  delete(hero: Hero): void 
+  {
     this.heroes = this.heroes.filter(h => h !== hero);
     this.heroService.deleteHero(hero.id).subscribe();
   }
-  
+
 }
